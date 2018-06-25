@@ -1,0 +1,35 @@
+{
+  "name": "hapipal-realworld-example-app",
+  "version": "0.0.0",
+  "description": "Exemplary real world application built with hapi pal",
+  "author": "Devin Ivy <devin@bigroomstudios.com>",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "start": "node server",
+    "test": "lab -a code -L",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "boom": "7.x.x",
+    "haute-couture": "3.x.x",
+    "joi": "13.x.x"
+  },
+  "devDependencies": {
+    "eslint-plugin-hapi": "4.x.x",
+    "code": "5.x.x",
+    "dotenv": "5.x.x",
+    "eslint": "4.x.x",
+    "eslint-config-hapi": "11.x.x",
+    "confidence": "3.x.x",
+    "glue": "5.x.x",
+    "hapi": "17.x.x",
+    "hpal-debug": "1.x.x",
+    "lab": "15.x.x",
+    "toys": "2.x.x"
+  }
+}
