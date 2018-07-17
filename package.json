@@ -27,6 +27,7 @@
     "knex": "0.15.x",
     "objection": "1.x.x",
     "objection-db-errors": "1.x.x",
+    "randomstring": "1.x.x",
     "schmervice": "1.x.x",
     "schwifty": "4.x.x",
     "secure-password": "3.x.x",
