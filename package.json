@@ -15,6 +15,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "avocat": "1.x.x",
     "boom": "7.x.x",
     "confidence": "3.x.x",
     "dotenv": "6.x.x",
