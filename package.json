@@ -44,6 +44,7 @@
     "eslint-plugin-hapi": "4.x.x",
     "hoek": "5.x.x",
     "hpal-debug": "1.x.x",
-    "lab": "15.x.x"
+    "lab": "15.x.x",
+    "newman": "3.x.x"
   }
 }

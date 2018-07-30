@@ -11,7 +11,11 @@ Dotenv.config({ path: `${__dirname}/.env` });
 module.exports = new Confidence.Store({
     server: {
         host: '0.0.0.0',
-        port: process.env.PORT || 3000,
+        port: {
+            $filter: 'NODE_ENV',
+            $default: process.env.PORT || 3000,
+            test: { $value: undefined }         // Let the server find an open port
+        },
         debug: {
             $filter: 'NODE_ENV',
             development: {
@@ -28,7 +32,11 @@ module.exports = new Confidence.Store({
                     prefix: '/api'
                 },
                 options: {
-                    jwtKey: process.env.APP_SECRET
+                    jwtKey: {
+                        $filter: 'NODE_ENV',
+                        $default: process.env.APP_SECRET,
+                        test: 'app-secret'
+                    }
                 }
             },
             {
@@ -48,11 +56,8 @@ module.exports = new Confidence.Store({
                         knex: {
                             client: 'sqlite3',
                             useNullAsDefault: true,         // Suggested for sqlite3
-                            pool: {
-                                idleTimeoutMillis: Infinity // Handles knex v0.12/0.13 misconfiguration when using sqlite3 (tgriesser/knex#1701)
-                            },
                             connection: {
-                                filename: ':memory:'
+                                filename: `.${process.env.NODE_ENV || 'tmp'}.db`
                             }
                         }
                     },
