@@ -18,7 +18,7 @@ const { expect } = Code;
 
 describe('Deployment', () => {
 
-    it('passes postman tests', { timeout: 5000 }, async (flags) => {
+    const dropDb = async () => {
 
         try {
             await Util.promisify(Fs.unlink)('.test.db');
@@ -26,6 +26,89 @@ describe('Deployment', () => {
         catch (error) {
             Bounce.ignore(error, { code: 'ENOENT' });
         }
+    };
+
+    it('allows a user to login, signup, then fetch their user info.', async () => {
+
+        await dropDb();
+
+        const server = await Server.deployment();
+
+        const signup = await server.inject({
+            method: 'post',
+            url: '/api/users',
+            payload: {
+                user: {
+                    username: 'test-user',
+                    password: 'test-pass',
+                    email: 'x@y.com'
+                }
+            }
+        });
+
+        expect(signup.statusCode).to.equal(200);
+        expect(signup.result).to.equal({
+            user: {
+                id: 1,
+                username: 'test-user',
+                email: 'x@y.com',
+                bio: null,
+                image: null,
+                token: signup.result.user.token
+            }
+        });
+
+        expect(signup.result.user.token).to.be.a.string();
+
+        const login = await server.inject({
+            method: 'post',
+            url: '/api/users/login',
+            payload: {
+                user: {
+                    email: 'x@y.com',
+                    password: 'test-pass'
+                }
+            }
+        });
+
+        expect(login.statusCode).to.equal(200);
+        expect(login.result).to.equal({
+            user: {
+                id: 1,
+                username: 'test-user',
+                email: 'x@y.com',
+                bio: null,
+                image: null,
+                token: login.result.user.token
+            }
+        });
+
+        expect(login.result.user.token).to.be.a.string();
+
+        const getCurrentUser = await server.inject({
+            method: 'get',
+            url: '/api/user',
+            headers: {
+                authorization: `Token ${login.result.user.token}`
+            }
+        });
+
+        expect(getCurrentUser.statusCode).to.equal(200);
+        expect(getCurrentUser.result).to.equal({
+            user: {
+                id: 1,
+                username: 'test-user',
+                email: 'x@y.com',
+                bio: null,
+                image: null,
+                token: login.result.user.token
+            }
+        });
+    });
+
+    it('passes postman tests.', { timeout: 5000 }, async (flags) => {
+
+        await dropDb();
 
         const server = await Server.deployment(true);
 
