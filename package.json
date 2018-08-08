@@ -5,6 +5,9 @@
   "author": "Devin Ivy <devin@bigroomstudios.com>",
   "license": "MIT",
   "main": "lib/index.js",
+  "engines": {
+    "node": "10.x.x"
+  },
   "directories": {
     "lib": "lib",
     "test": "test"
