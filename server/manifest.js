@@ -34,8 +34,8 @@ module.exports = new Confidence.Store({
                 options: {
                     jwtKey: {
                         $filter: 'NODE_ENV',
-                        $default: process.env.APP_SECRET,
-                        test: 'app-secret'
+                        $default: process.env.APP_SECRET || 'app-secret',
+                        production: { $value: process.env.APP_SECRET }  // In production do not default to "app-secret"
                     }
                 }
             },
