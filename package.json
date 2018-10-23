@@ -26,7 +26,7 @@
     "glue": "5.x.x",
     "hapi": "17.x.x",
     "hapi-auth-jwt2": "8.x.x",
-    "haute-couture": "3.x.x",
+    "haute-couture": ">=3.1.x <4",
     "joi": "13.x.x",
     "jsonwebtoken": "8.x.x",
     "knex": "0.15.x",
