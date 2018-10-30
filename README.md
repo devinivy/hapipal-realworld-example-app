@@ -1,4 +1,5 @@
 # ![RealWorld Example App](.github/logo.png)
+[![Build Status](https://travis-ci.org/devinivy/hapipal-realworld-example-app.svg?branch=master)](https://travis-ci.org/devinivy/hapipal-realworld-example-app)
 
 > ### hapi pal codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld) spec and API.
 
