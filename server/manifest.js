@@ -10,17 +10,24 @@ Dotenv.config({ path: `${__dirname}/.env` });
 // Glue manifest as a confidence store
 module.exports = new Confidence.Store({
     server: {
-        host: '0.0.0.0',
+        host: 'localhost',
         port: {
-            $filter: 'NODE_ENV',
-            $default: process.env.PORT || 3000,
+            $filter: { $env: 'NODE_ENV' },
+            $default: {
+                $env: 'PORT',
+                $coerce: 'number',
+                $default: 3000
+            },
             test: { $value: undefined }         // Let the server find an open port
         },
         debug: {
-            $filter: 'NODE_ENV',
-            development: {
-                log: ['error', 'implementation', 'internal'],
-                request: ['error', 'implementation', 'internal']
+            $filter: { $env: 'NODE_ENV' },
+            $default: {
+                log: ['error'],
+                request: ['error']
+            },
+            production: {
+                request: ['implementation']
             }
         }
     },
@@ -33,15 +40,20 @@ module.exports = new Confidence.Store({
                 },
                 options: {
                     jwtKey: {
-                        $filter: 'NODE_ENV',
-                        $default: process.env.APP_SECRET || 'app-secret',
-                        production: { $value: process.env.APP_SECRET }  // In production do not default to "app-secret"
+                        $filter: { $env: 'NODE_ENV' },
+                        $default: {
+                            $env: 'APP_SECRET',
+                            $default: 'app-secret'
+                        },
+                        production: {           // In production do not default to "app-secret"
+                            $env: 'APP_SECRET'
+                        }
                     }
                 }
             },
             {
                 plugin: {
-                    $filter: 'NODE_ENV',
+                    $filter: { $env: 'NODE_ENV' },
                     $default: 'hpal-debug',
                     production: Toys.noop
                 }
@@ -49,7 +61,7 @@ module.exports = new Confidence.Store({
             {
                 plugin: 'schwifty',
                 options: {
-                    $filter: 'NODE_ENV',
+                    $filter: { $env: 'NODE_ENV' },
                     $default: {},
                     $base: {
                         migrateOnStart: true,

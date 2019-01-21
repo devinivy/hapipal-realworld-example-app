@@ -110,7 +110,9 @@ describe('Deployment', () => {
 
         await dropDb();
 
-        const server = await Server.deployment(true);
+        const server = await Server.deployment();
+
+        await server.start();
 
         flags.onCleanup = async () => await server.stop();
 
