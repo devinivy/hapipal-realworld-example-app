@@ -6,7 +6,7 @@
 
 ### [Demo](https://glitch.com/~hapipal-realworld)&nbsp;&nbsp;&nbsp;&nbsp;[RealWorld](https://github.com/gothinkster/realworld)
 
-This codebase was created to demonstrate a fully fledged application backend built with [**hapi pal**](https://hapipal.com) including CRUD operations, authentication, routing, pagination, and more.  The functionality implemented in this project is specified by the [RealWorld API spec](https://github.com/gothinkster/realworld/tree/master/api).
+This codebase was created to demonstrate a fully fledged application backend built with [**hapi pal**](https://hapipal.com) including CRUD operations, authentication, routing, pagination, and more.  The functionality implemented in this project is specified by the [RealWorld API spec](https://github.com/gothinkster/realworld/tree/master/api).  See our Medium post ["Building real-world APIs with hapi pal"](https://medium.com/@hapipal/building-real-world-apis-with-hapi-pal-c0303fcef1c6) for an in-depth writeup about this project.
 
 We've gone to great lengths to adhere to the **hapi pal** community styleguides & best practices.
 
