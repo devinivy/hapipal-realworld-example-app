@@ -4,9 +4,9 @@
 
 const Fs = require('fs');
 const Util = require('util');
-const Bounce = require('bounce');
-const Code = require('code');
-const Lab = require('lab');
+const Bounce = require('@hapi/bounce');
+const Code = require('@hapi/code');
+const Lab = require('@hapi/lab');
 const Toys = require('toys');
 const Newman = require('newman');
 const Server = require('../server');
