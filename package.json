@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start": "node server",
-    "test": "lab -a @hapi/code -I '__core-js_shared__' -L",
+    "test": "lab -a @hapi/code -L",
     "lint": "eslint ."
   },
   "dependencies": {
@@ -29,7 +29,7 @@
     "hapi-auth-jwt2": "8.x.x",
     "haute-couture": ">=3.1.x <4",
     "jsonwebtoken": "8.x.x",
-    "knex": "0.16.x",
+    "knex": "0.17.x",
     "objection": "1.x.x",
     "objection-db-errors": "1.x.x",
     "randomstring": "1.x.x",
@@ -41,8 +41,8 @@
     "toys": "2.x.x"
   },
   "devDependencies": {
-    "@hapi/lab": "18.x.x",
     "@hapi/code": "5.x.x",
+    "@hapi/lab": "19.x.x",
     "eslint": "5.x.x",
     "eslint-config-hapi": "12.x.x",
     "eslint-plugin-hapi": "4.x.x",
