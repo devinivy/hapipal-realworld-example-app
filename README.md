@@ -16,7 +16,7 @@ For more information on how to this works with other frontends/backends, head ov
 
 The database used by this backend is [SQLite](https://github.com/mapbox/node-sqlite3), which is installed via `npm install`, so it's very simple to get started!
 
-Just ensure you've installed a recent version of [nodejs](https://nodejs.org/en/download/) (v8.11+), which comes bundled with the npm package manager referenced in commands below.
+Just ensure you've installed a recent version of [nodejs](https://nodejs.org/en/download/) (v12.13+), which comes bundled with the npm package manager referenced in commands below.
 
 > Note that the database is persisted to disk based upon the environment's `NODE_ENV`: `.test.db`, `.production.db`, etc., or `.tmp.db` by default.
 
