@@ -2,6 +2,7 @@
 
 const Dotenv = require('dotenv');
 const Confidence = require('confidence');
+const Schwifty = require('schwifty');
 const Toys = require('toys');
 
 // Pull .env into process.env
@@ -70,6 +71,9 @@ module.exports = new Confidence.Store({
                             useNullAsDefault: true,         // Suggested for sqlite3
                             connection: {
                                 filename: `.${process.env.NODE_ENV || 'tmp'}.db`
+                            },
+                            migrations: {
+                                stub: Schwifty.migrationsStubPath
                             }
                         }
                     },
