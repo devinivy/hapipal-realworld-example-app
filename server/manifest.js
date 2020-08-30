@@ -65,7 +65,11 @@ module.exports = new Confidence.Store({
                     $filter: { $env: 'NODE_ENV' },
                     $default: {},
                     $base: {
-                        migrateOnStart: true,
+                        migrateOnStart: {
+                            $filter: { $env: 'HPAL' },
+                            true: false,
+                            $default: true
+                        },
                         knex: {
                             client: 'sqlite3',
                             useNullAsDefault: true,         // Suggested for sqlite3
