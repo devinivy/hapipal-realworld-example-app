@@ -20,22 +20,6 @@ Just ensure you've installed a recent version of [nodejs](https://nodejs.org/en/
 
 > Note that the database is persisted to disk based upon the environment's `NODE_ENV`: `.test.db`, `.production.db`, etc., or `.tmp.db` by default.
 
-##### Listening outside of localhost
-
-By default the application listens on port 3000 but only on localhost, as defined in `server/manifest.js`
-
-If you want to use or test the API outside of localhost (e.g. you are running the API on a virtual machine and you want to test from the host) then modify this file to change the line:
-
-```sh
-        host: 'localhost',
-```
-
-to read:
-
-```sh
-        host: '0.0.0.0',
-```
-
 ##### Development installation
 ```sh
 $ npm install
@@ -59,6 +43,17 @@ $ npm install --production
 $ cp server/.env-keep server/.env
 $ vi server/.env # Set APP_SECRET using your favorite editor
 $ NODE_ENV=production npm start
+```
+
+##### Listening outside of localhost
+
+By default the application listens on localhost port 3000, as defined in [`server/manifest.js`](server/manifest.js).
+
+If you want to access the API outside of localhost (e.g. you are running the API on a virtual machine and you want to access it from the host) then you may make the following modification to this file:
+
+```diff
+-        host: 'localhost',
++        host: '0.0.0.0',
 ```
 
 ## How it works
