@@ -1,9 +1,9 @@
 'use strict';
 
 const Dotenv = require('dotenv');
-const Confidence = require('confidence');
-const Schwifty = require('schwifty');
-const Toys = require('toys');
+const Confidence = require('@hapipal/confidence');
+const Schwifty = require('@hapipal/schwifty');
+const Toys = require('@hapipal/toys');
 
 // Pull .env into process.env
 Dotenv.config({ path: `${__dirname}/.env` });
@@ -13,18 +13,18 @@ module.exports = new Confidence.Store({
     server: {
         host: 'localhost',
         port: {
-            $filter: { $env: 'NODE_ENV' },
+            $filter: 'NODE_ENV',
             $default: {
-                $env: 'PORT',
+                $param: 'PORT',
                 $coerce: 'number',
                 $default: 3000
             },
             test: { $value: undefined }         // Let the server find an open port
         },
         debug: {
-            $filter: { $env: 'NODE_ENV' },
+            $filter: 'NODE_ENV',
             $default: {
-                log: ['error'],
+                log: ['error', 'start'],
                 request: ['error']
             },
             production: {
@@ -41,35 +41,31 @@ module.exports = new Confidence.Store({
                 },
                 options: {
                     jwtKey: {
-                        $filter: { $env: 'NODE_ENV' },
+                        $filter: 'NODE_ENV',
                         $default: {
-                            $env: 'APP_SECRET',
+                            $param: 'APP_SECRET',
                             $default: 'app-secret'
                         },
                         production: {           // In production do not default to "app-secret"
-                            $env: 'APP_SECRET'
+                            $param: 'APP_SECRET'
                         }
                     }
                 }
             },
             {
                 plugin: {
-                    $filter: { $env: 'NODE_ENV' },
-                    $default: 'hpal-debug',
+                    $filter: 'NODE_ENV',
+                    $default: '@hapipal/hpal-debug',
                     production: Toys.noop
                 }
             },
             {
-                plugin: 'schwifty',
+                plugin: '@hapipal/schwifty',
                 options: {
-                    $filter: { $env: 'NODE_ENV' },
+                    $filter: 'NODE_ENV',
                     $default: {},
                     $base: {
-                        migrateOnStart: {
-                            $filter: { $env: 'HPAL' },
-                            true: false,
-                            $default: true
-                        },
+                        migrateOnStart: true,
                         knex: {
                             client: 'sqlite3',
                             useNullAsDefault: true,         // Suggested for sqlite3
