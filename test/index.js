@@ -7,7 +7,7 @@ const Util = require('util');
 const Bounce = require('@hapi/bounce');
 const Code = require('@hapi/code');
 const Lab = require('@hapi/lab');
-const Toys = require('toys');
+const Toys = require('@hapipal/toys');
 const Newman = require('newman');
 const Server = require('../server');
 
