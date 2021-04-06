@@ -14,6 +14,10 @@ For more information on how to this works with other frontends/backends, head ov
 
 ## Getting started
 
+> 👋 First, a brief note:
+>
+> This example has been updated as an ✨ early preview ✨ of all the upcoming releases across the hapi pal ecosystem.  Each pal module has received major version updates recently released under the new `@hapipal/`-scoped modules.  These are ready for production usage, but please note that [the pal boilerplate](), [hapipal.com](https://hapipal.com), and other pal documentation may not reflect these updates for a few days.  Expect to hear more from us then! 🍵
+
 The database used by this backend is [SQLite](https://github.com/mapbox/node-sqlite3), which is installed via `npm install`, so it's very simple to get started!
 
 Just ensure you've installed a recent version of [nodejs](https://nodejs.org/en/download/) (v12.19+), which comes bundled with the npm package manager referenced in commands below.
@@ -94,7 +98,7 @@ The final point of interest in the service layer is its convention for transacti
 
 At the end of the day, we do all this work so that we can create some routes, or API endpoints.  Each route consists of a [hapi route configuration](https://github.com/hapijs/hapi/blob/master/API.md#server.route()) placed as a file in [`lib/routes/`](lib/routes).  These configurations provide information about the matching HTTP method and path; validation of incoming query, path, and payload parameters; authentication; and a handler or controller implementing the logic behind the route.
 
-Validation is specified using hapi's robust [joi](https://github.com/hapijs/joi) validation library, which is the same means of validation used by our model layer.  Since the routes and models use the same means of validation, routes are able to refer to the model's validation.  For example, when a user logs-in the payload contains an `email` parameter that must be a valid email; in the route configuration we defer to the `User` model's definition of a valid email and mark it as a required field: [`User.field('email').required()`](lib/routes/users/signup.js#L16).
+Validation is specified using hapi's robust [joi](https://github.com/hapijs/joi) validation library, which is the same means of validation used by our model layer.  Since the routes and models use the same means of validation, routes are able to refer to the model's validation.  For example, when a user logs-in the payload contains an `email` parameter that must be a valid email; in the route configuration we defer to the `User` model's definition of a valid email and mark it as a required field: [`User.field('email').required()`](lib/routes/users/signup.js#L14).
 
 The route handlers themselves are relatively light.  They generally compose payload, query, and path parameters, and the user's authentication status into one or many calls into the service layer, then return a response.  Handlers are also responsible for the transactional integrity of their calls into the service layer.  For example, if a user makes requests in quick succession to favorite then unfavorite an article, each of those requests must come back reflecting the proper state: there should be no way for the request to unfavorite the article sneak its way in so that the request to favorite the article responds with `favorited: false`, or vice-versa.  So, handlers will often generate a transaction object using a thin helper around [`Objection.transaction()`](http://vincit.github.io/objection.js/#transaction]) (defined in [`lib/bind.js`](lib/bind.js)), then pass that transaction to the various service methods that it uses.   As mentioned in the previous section, handlers typically end with a call to the `DisplayService`, whose sole purpose is to format and enrich information about the model (users, articles, comments, and tags) for API responses.
 
