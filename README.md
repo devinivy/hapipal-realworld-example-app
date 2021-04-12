@@ -14,10 +14,6 @@ For more information on how to this works with other frontends/backends, head ov
 
 ## Getting started
 
-> 👋 First, a brief note:
->
-> This example has been updated as an ✨ early preview ✨ of all the upcoming releases across the hapi pal ecosystem.  Each pal module has received major version updates recently released under the new `@hapipal/`-scoped modules.  These are ready for production usage, but please note that [the pal boilerplate](https://github.com/hapipal/boilerplate), [hapipal.com](https://hapipal.com), and other pal documentation may not reflect these updates for a few days.  Expect to hear more from us then! 🍵
-
 The database used by this backend is [SQLite](https://github.com/mapbox/node-sqlite3), which is installed via `npm install`, so it's very simple to get started!
 
 Just ensure you've installed a recent version of [nodejs](https://nodejs.org/en/download/) (v12.19+), which comes bundled with the npm package manager referenced in commands below.
