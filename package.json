@@ -31,6 +31,7 @@
     "@hapipal/schwifty": "6.x.x",
     "@hapipal/toys": "3.x.x",
     "dotenv": "8.x.x",
+    "exiting": "6.x.x",
     "joi": "17.x.x",
     "knex": "0.21.x",
     "objection": "2.x.x",
