@@ -33,7 +33,7 @@
     "dotenv": "8.x.x",
     "exiting": "6.x.x",
     "joi": "17.x.x",
-    "knex": "0.21.x",
+    "knex": "2.4.x",
     "objection": "2.x.x",
     "randomstring": "1.x.x",
     "secure-password": "4.x.x",
